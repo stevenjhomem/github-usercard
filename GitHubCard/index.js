@@ -5,6 +5,8 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>nom
 */
+
+let theURL = `https://api.github.com/users/` ;
 const myURL = `https://api.github.com/users/stevenjhomem`;
 let cards = document.querySelector('.cards');
 
@@ -116,7 +118,9 @@ function cardMaker(object){
 };
 
 addCard(myURL);
-
+followersArray.forEach((item) =>{
+  addCard(theURL+item);
+})
 
     /*<div class="card">
       <img src={image url of user} />
