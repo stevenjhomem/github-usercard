@@ -6,7 +6,7 @@
     https://api.github.com/users/<your name>nom
 */
 
-
+//Getting info from Github!//
 axios.get('https://api.github.com/users/stevenjhomem')
     .then( response => {
         console.log(response);
@@ -14,6 +14,7 @@ axios.get('https://api.github.com/users/stevenjhomem')
     .catch( error => {
         console.error(`No information was received.`)
     })
+//********************//
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
