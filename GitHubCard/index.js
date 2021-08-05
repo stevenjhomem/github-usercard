@@ -44,9 +44,68 @@ const followersArray = [];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
-    Using DOM methods and properties, create and return the following markup:
+    Using DOM methods and properties, create and return the following markup:*/
 
-    <div class="card">
+function cardMaker(object){
+
+  //Grabbing all elements from HTML document//
+  let div1 = document.createElement('div');
+  let avatar = document.createElement('img');
+  let div2 = document.createElement('div');
+  let name = document.createElement('h3');
+  let userName = document.createElement('p');
+  let location = document.createElement('p');
+  let profileURL = document.createElement('p');
+  let URL = document.createElement('a');
+  let followerCount = document.createElement('p');
+  let followingCount = document.createElement('p');
+  let bio = document.createElement('p');
+  //********************//
+
+  //Adding classes/attributes/text content/etc that are needed//
+  div1.classList.add('card');
+
+  avatar.setAttribute('src', object.data[avatar_url]);
+
+  div2.classList.add('card-info');
+
+  name.classList.add('name');
+  name.textContent(obejct.data.name);
+
+  userName.classList.add('username');
+  userName.textContent(object.data.login);
+
+  location.textContent(`Location: ${object.data.location}`);
+
+  profileURL.textContent(`Profile: `);
+
+  URL.setAttribute('href', object.data.url);
+  URL.textContent(`Github URL for ${object.data.name}`);
+
+  followersCount.textContent(`Followers: ${object.data.followers}`);
+
+  followingCount.textContent(`Following: ${object.data.following}`);
+
+  bio.textContent(`Bio: ${object.data.bio}`);
+  //********************//
+
+  //Appending everything in the order that I want//
+  div1.appendChild(avatar);
+  div1.appendChild(div2);
+  div2.appendChild(name);
+  div2.appendChild(userName);
+  div2.appendChild(location);
+  div2.appendChild(profileURL);
+  profileURL.appendChild(URL);
+  div2.appendChild(followerCount);
+  div2.appendChild(followingCount);
+  div2.appendChild(bio);
+  //********************//
+
+  return div1;
+};
+
+    /*<div class="card">
       <img src={image url of user} />
       <div class="card-info">
         <h3 class="name">{users name}</h3>
