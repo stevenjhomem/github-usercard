@@ -5,15 +5,21 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>nom
 */
+const myURL = `https://api.github.com/users/stevenjhomem`;
+let cards = document.querySelector('.cards');
+
 
 //Getting info from Github!//
-axios.get('https://api.github.com/users/stevenjhomem')
+function addCard(webAddress){
+  return axios.get(webAddress)
     .then( response => {
-        console.log(response);
+        console.log(response.data);
+        cards.appendChild(cardMaker(response.data));
     })
     .catch( error => {
         console.error(`No information was received.`)
     })
+  }
 //********************//
 
 /*
@@ -40,7 +46,11 @@ axios.get('https://api.github.com/users/stevenjhomem')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan',
+                        'dustinmyers', 
+                        'justsml', 
+                        'luishrd', 
+                        'bigknell'];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -57,7 +67,7 @@ function cardMaker(object){
   let location = document.createElement('p');
   let profileURL = document.createElement('p');
   let URL = document.createElement('a');
-  let followerCount = document.createElement('p');
+  let followersCount = document.createElement('p');
   let followingCount = document.createElement('p');
   let bio = document.createElement('p');
   //********************//
@@ -65,28 +75,28 @@ function cardMaker(object){
   //Adding classes/attributes/text content/etc that are needed//
   div1.classList.add('card');
 
-  avatar.setAttribute('src', object.data[avatar_url]);
+  avatar.setAttribute('src', object['avatar_url']);
 
   div2.classList.add('card-info');
 
   name.classList.add('name');
-  name.textContent(obejct.data.name);
+  name.textContent = object.name;
 
   userName.classList.add('username');
-  userName.textContent(object.data.login);
+  userName.textContent = object.login;
 
-  location.textContent(`Location: ${object.data.location}`);
+  location.textContent =`Location: ${object.location}`;
 
-  profileURL.textContent(`Profile: `);
+  profileURL.textContent = `Profile: `;
 
-  URL.setAttribute('href', object.data.url);
-  URL.textContent(`Github URL for ${object.data.name}`);
+  URL.setAttribute('href', object.url);
+  URL.textContent = `Github URL for ${object.name}`;
 
-  followersCount.textContent(`Followers: ${object.data.followers}`);
+  followersCount.textContent = `Followers: ${object.followers}`;
 
-  followingCount.textContent(`Following: ${object.data.following}`);
+  followingCount.textContent = `Following: ${object.following}`;
 
-  bio.textContent(`Bio: ${object.data.bio}`);
+  bio.textContent = `Bio: ${object.bio}`;
   //********************//
 
   //Appending everything in the order that I want//
@@ -97,13 +107,16 @@ function cardMaker(object){
   div2.appendChild(location);
   div2.appendChild(profileURL);
   profileURL.appendChild(URL);
-  div2.appendChild(followerCount);
+  div2.appendChild(followersCount);
   div2.appendChild(followingCount);
   div2.appendChild(bio);
   //********************//
 
   return div1;
 };
+
+addCard(myURL);
+
 
     /*<div class="card">
       <img src={image url of user} />
